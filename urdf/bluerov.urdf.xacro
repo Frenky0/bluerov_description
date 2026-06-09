@@ -248,7 +248,7 @@
     <xacro:ros2_control_thruster_joint joint_name="Thruster_L_FORWARD_REAR" inverted="true"/>
     <xacro:ros2_control_thruster_joint joint_name="Thruster_R_UP_FRONT" inverted="false"/>
     <xacro:ros2_control_thruster_joint joint_name="Thruster_L_UP_FRONT" inverted="true"/>
-    <xacro:ros2_control_thruster_joint joint_name="Thruster_R_UP_REAR" inverted="true"/>
+    <xacro:ros2_control_thruster_joint joint_name="Thruster_R_UP_REAR" inverted="false"/>
     <xacro:ros2_control_thruster_joint joint_name="Thruster_L_UP_REAR" inverted="false"/>
   </ros2_control>
 
