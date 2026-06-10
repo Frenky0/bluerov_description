@@ -1,7 +1,23 @@
 /bluerov/controller/controller_manager:
   ros__parameters:
     update_rate: 200
+    
+    common_controllers:
+      - body_force
+      - imu_broadcaster
+      - magnetometer_broadcaster
+      - pressure_broadcaster
+      - battery_broadcaster
 
+    auv_controllers:
+      - thruster_test_controller
+      - body_velocity
+      - position_hold
+      - stabilize
+      - depth_hold
+
+
+      
     hardware_components_initial_state:
       inactive:
         - ThrustersSystem
@@ -11,21 +27,23 @@
     thruster_test_controller:
       type: forward_command_controller/ForwardCommandController
 
+    
     body_force:
-      type: cirtesub_controllers/BodyForceController
+      type: sura_controllers/auv/BodyForceController
     
     body_velocity:
-      type: cirtesub_controllers/BodyVelocityController
+      type: sura_controllers/auv/BodyVelocityController
 
     position_hold:
-      type: cirtesub_controllers/PositionHoldController
+      type: sura_controllers/auv/PositionHoldController
 
     stabilize:
-      type: cirtesub_controllers/StabilizeController
+      type: sura_controllers/auv/StabilizeController
 
     depth_hold:
-      type: cirtesub_controllers/DepthHoldController
-
+      type: sura_controllers/auv/DepthHoldController
+    
+    
     imu_broadcaster:
       type: imu_sensor_broadcaster/IMUSensorBroadcaster
 
