@@ -9,7 +9,7 @@
   <xacro:arg name="pressure_offset_pa" default="0.0"/>
   <!-- Servo motor parameters for future use -->
   <xacro:arg name="servo_sim_topic" default="/bluerov/controller/servo_setpoints_sim"/>
-  <xacro:arg name="servo_pwm_channels" default="13,14,15"/> <!-- motor Gripper: 13, Zip = 14,Camera = 15 -->
+  <xacro:arg name="servo_pwm_channels" default="12,14,15"/> <!-- motor Gripper: 12, Zip = 14,Camera = 15 -->
   
   <!-- End of servo motor parameters -->
 
