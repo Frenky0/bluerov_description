@@ -16,7 +16,9 @@ diagnostics:
   params_package: sura_diagnostics
   params: config/bluerov_diagnostics.yaml
 
-cameras: {}
+cameras:
+  gripper_camera:
+    enabled: true
 
 imu:
   raw_imu_topic: controller/imu_broadcaster/imu

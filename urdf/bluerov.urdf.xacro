@@ -9,7 +9,7 @@
   <xacro:arg name="pressure_offset_pa" default="0.0"/>
   <!-- Servo motor parameters for future use -->
   <xacro:arg name="servo_sim_topic" default="/bluerov/controller/servo_setpoints_sim"/>
-  <xacro:arg name="servo_pwm_channels" default="12,14,15"/> <!-- Newton Gripper: 12, Zip = 14,Camera = 15 -->
+  <xacro:arg name="servo_pwm_channels" default="13,14,15"/> <!-- motor Gripper: 13, Zip = 14,Camera = 15 -->
   
   <!-- End of servo motor parameters -->
 
@@ -129,6 +129,24 @@
     <origin xyz="0.0 0.0 0.0" rpy="-1.57 3.14 -1.57"/>
   </joint>
 
+  <!-- camera gripper -->
+  <link name="${robot_prefix}camera_gripper"/>
+
+  <joint name="${robot_prefix}camera_gripper_joint" type="fixed">
+    <parent link="${robot_prefix}base_link"/>
+    <child link="${robot_prefix}camera_gripper"/>
+    <origin xyz="0.17 -0.005 -0.035" rpy="0.0 0.0 0.0"/>
+  </joint>
+
+  <link name="${robot_prefix}camera_gripper/optical_frame"/>
+
+  <joint name="${robot_prefix}camera_gripper_optical_frame_joint" type="fixed">
+    <parent link="${robot_prefix}camera_gripper"/>
+    <child link="${robot_prefix}camera_gripper/optical_frame"/>
+    <origin xyz="0.0 0.0 0.0" rpy="-1.57 3.14 -1.57"/>
+  </joint>
+
+
   <!-- camera left -->
   <link name="${robot_prefix}camera_left"/>
 
@@ -196,15 +214,17 @@
 
   
   <!-- Newton Gripper -->
-  <link name="${robot_prefix}newton_gripper"/>
+  <!--<link name="${robot_prefix}newton_gripper"/>-->
 
-  <joint name="${robot_prefix}newton_gripper_joint" type="prismatic">
+  <!-- Motor Gripper -->
+  <link name="${robot_prefix}motor_gripper"/>
+
+  <joint name="${robot_prefix}motor_gripper_joint" type="revolute">
     <parent link="${robot_prefix}base_link"/>
-    <child link="${robot_prefix}newton_gripper"/>
+    <child link="${robot_prefix}motor_gripper"/>
     <origin xyz="0.25 0.0 -0.05" rpy="0.0 0.0 0.0"/>
-    <axis xyz="1 0 0"/>
-    <!-- Limits normalized: da -1.0 a 1.0 -->
-    <limit lower="-1.0" upper="1.0" effort="10.0" velocity="1.0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.0" upper="1.0" effort="10.0" velocity="10.0"/>
   </joint>
 
   <!-- Servo Zip -->
@@ -268,13 +288,18 @@
         <param name="sim_pressure_topic">/${robot_namespace}/stonefish/sensors/pressure</param>
         <param name="sim_gps_topic">/${robot_namespace}/stonefish/sensors/gps</param>
         <param name="pressure_offset_pa">$(arg pressure_offset_pa)</param>
-        <param name="pressure_read_rate_hz">200.0</param>
+        <param name="pressure_read_rate_hz">100.0</param>
         <param name="battery_read_rate_hz">1.0</param>
       </hardware>
 
-            <sensor name="imu_sensor">
+
+      <sensor name="imu_sensor">
         <param name="interface">sura_hardware_interface/ImuInterface</param>
+        <param name="broadcaster">imu_broadcaster</param>
+        <param name="read_rate_hz">100.0</param>
+        <param name="frame_id">${robot_namespace}/imu_link</param>
         <param name="stonefish_topic">/${robot_namespace}/stonefish/sensors/imu</param>
+        <param name="msg_type">sensor_msgs/msg/Imu</param>
         <state_interface name="orientation.x"/>
         <state_interface name="orientation.y"/>
         <state_interface name="orientation.z"/>
@@ -285,21 +310,30 @@
         <state_interface name="linear_acceleration.x"/>
         <state_interface name="linear_acceleration.y"/>
         <state_interface name="linear_acceleration.z"/>
+        <state_interface name="sample_time.sec"/>
+        <state_interface name="sample_time.nanosec"/>
       </sensor>
+      
 
       <sensor name="magnetometer_sensor">
         <param name="interface">sura_hardware_interface/MagnetometerInterface</param>
+        <param name="broadcaster">magnetometer_broadcaster</param>
+        <param name="read_rate_hz">100.0</param>
+        <param name="frame_id">${robot_namespace}/imu_link</param>
         <param name="stonefish_topic">/${robot_namespace}/stonefish/sensors/magnetometer</param>
+        <param name="msg_type">sensor_msgs/msg/MagneticField</param>
         <state_interface name="magnetic_field.x"/>
         <state_interface name="magnetic_field.y"/>
         <state_interface name="magnetic_field.z"/>
-      </sensor>
+        <state_interface name="sample_time.sec"/>
+        <state_interface name="sample_time.nanosec"/>
+    </sensor>
 
       <sensor name="pressure_sensor">
         <param name="interface">sura_hardware_interface/PressureInterface</param>
         <param name="stonefish_topic">/${robot_namespace}/stonefish/sensors/pressure</param>
         <param name="pressure_offset_pa">$(arg pressure_offset_pa)</param>
-        <param name="read_rate_hz">200.0</param>
+        <param name="read_rate_hz">100.0</param>
         <state_interface name="fluid_pressure"/>
       </sensor>
 
@@ -324,9 +358,9 @@
     </hardware>
 
     <!-- the order is important: must match the PWM channel order -->
-    <xacro:ros2_control_servo_joint joint_name="newton_gripper_joint" controller="newton_gripper_controller" inverted="false" center_offset_rad="0.0"/>
-<xacro:ros2_control_servo_joint joint_name="servo_zip_joint" controller="servo_zip_controller" inverted="false" center_offset_rad="0.0"/>
-<xacro:ros2_control_servo_joint joint_name="servo_camera_joint" controller="servo_camera_controller" inverted="false" center_offset_rad="0.0"/>
+    <xacro:ros2_control_servo_joint joint_name="motor_gripper_joint" controller="motor_gripper_controller" inverted="false" center_offset_rad="0.0"/>
+    <xacro:ros2_control_servo_joint joint_name="servo_zip_joint" controller="servo_zip_controller" inverted="false" center_offset_rad="0.0"/>
+    <xacro:ros2_control_servo_joint joint_name="servo_camera_joint" controller="servo_camera_controller" inverted="false" center_offset_rad="0.0"/>
   </ros2_control>
 
 </robot>

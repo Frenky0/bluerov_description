@@ -56,7 +56,7 @@
     battery_broadcaster:
       type: sura_sensors/BatteryBroadcaster
     
-    newton_gripper_controller:
+    motor_gripper_controller:
       type: position_controllers/JointGroupPositionController
 
     servo_zip_controller:
@@ -260,10 +260,10 @@
     topic_name: /bluerov/battery/status
     update_rate: 1
 
-/bluerov/controller/newton_gripper_controller:
+/bluerov/controller/motor_gripper_controller:
   ros__parameters:
     joints:
-      - bluerov/newton_gripper_joint
+      - bluerov/motor_gripper_joint
     interface_name: position
 
 /bluerov/controller/servo_zip_controller:
