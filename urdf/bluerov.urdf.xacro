@@ -50,13 +50,15 @@
 
 
 <!-- This macro is defined for future use if we want to add servo motors to the ROV. -->
-<xacro:macro name="ros2_control_servo_joint" params="joint_name controller inverted center_offset_rad">
+<xacro:macro name="ros2_control_servo_joint" params="joint_name controller inverted center_offset_rad pulse_min_us:=1000.0 pulse_max_us:=2000.0">
   <joint name="${robot_prefix}${joint_name}">
     <command_interface name="position"/>
     <state_interface name="position"/>
     <param name="controller">${controller}</param>
     <param name="inverted">${inverted}</param>
     <param name="center_offset_rad">${center_offset_rad}</param>
+    <param name="pulse_min_us">${pulse_min_us}</param>
+    <param name="pulse_max_us">${pulse_max_us}</param>
   </joint>
 </xacro:macro>
 <!-- End of servo joint macro -->
@@ -358,7 +360,7 @@
     </hardware>
 
     <!-- the order is important: must match the PWM channel order -->
-    <xacro:ros2_control_servo_joint joint_name="motor_gripper_joint" controller="motor_gripper_controller" inverted="false" center_offset_rad="0.0"/>
+    <xacro:ros2_control_servo_joint joint_name="motor_gripper_joint" controller="motor_gripper_controller" inverted="false" center_offset_rad="0.0" pulse_min_us="500.0" pulse_max_us="2500.0"/>    
     <xacro:ros2_control_servo_joint joint_name="servo_zip_joint" controller="servo_zip_controller" inverted="false" center_offset_rad="0.0"/>
     <xacro:ros2_control_servo_joint joint_name="servo_camera_joint" controller="servo_camera_controller" inverted="false" center_offset_rad="0.0"/>
   </ros2_control>
