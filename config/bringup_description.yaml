@@ -17,6 +17,8 @@ diagnostics:
   params: config/bluerov_diagnostics.yaml
 
 cameras:
+  front_camera:
+    enabled: true
   gripper_camera:
     enabled: true
 
