@@ -106,7 +106,7 @@
     antiwindup_z: 10.0
 
     kp_roll: 50.0
-    ki_roll: 50.0
+    ki_roll: 25.0
     kd_roll: 0.0
     antiwindup_roll: 10.0
 
