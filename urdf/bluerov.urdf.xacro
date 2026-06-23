@@ -67,7 +67,7 @@
     <visual>
       <geometry>
         <mesh
-          filename="package://bluerov_description/urdf/bluerov/meshes/bluerov2_heavy/bluerov2_centrado.dae"
+          filename="package://bluerov_description/urdf/meshes/bluerov2_heavy/bluerov2_centrado.dae"
           scale="0.025 0.025 0.025"/>
       </geometry>
       <origin rpy="3.1416 0 0" xyz="0 0 0"/>
@@ -361,7 +361,7 @@
 
     <!-- the order is important: must match the PWM channel order -->
     <xacro:ros2_control_servo_joint joint_name="motor_gripper_joint" controller="motor_gripper_controller" inverted="false" center_offset_rad="0.0" pulse_min_us="500.0" pulse_max_us="2500.0"/>    
-    <xacro:ros2_control_servo_joint joint_name="servo_zip_joint" controller="servo_zip_controller" inverted="false" center_offset_rad="0.0" pulse_min_us="1083.0" pulse_max_us="1917.0"/>   
+    <xacro:ros2_control_servo_joint joint_name="servo_zip_joint" controller="servo_zip_controller" inverted="false" center_offset_rad="0.0" pulse_min_us="1200.0" pulse_max_us="1917.0"/>   
     <xacro:ros2_control_servo_joint joint_name="servo_camera_joint" controller="servo_camera_controller" inverted="false" center_offset_rad="0.0"/>
   </ros2_control>
 

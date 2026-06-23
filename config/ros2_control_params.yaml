@@ -237,14 +237,14 @@
   ros__parameters:
     sensor_name: imu_sensor
     frame_id: bluerov/imu_link
-    update_rate: 200
+    update_rate: 100
 
 /bluerov/controller/magnetometer_broadcaster:
   ros__parameters:
     sensor_name: magnetometer_sensor
     frame_id: bluerov/imu_link
     topic_name: /bluerov/controller/magnetometer_broadcaster/mag
-    update_rate: 200
+    update_rate: 100
 
 /bluerov/controller/pressure_broadcaster:
   ros__parameters:

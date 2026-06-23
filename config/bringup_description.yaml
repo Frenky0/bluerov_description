@@ -24,14 +24,17 @@ cameras:
 
 imu:
   raw_imu_topic: controller/imu_broadcaster/imu
-  filtered_imu_topic: imu/data
+  filtered_imu_topic: sensors/imu
   mag_topic: controller/magnetometer_broadcaster/mag
 
 localization:
   launch_package: sura_localization
   launch_file: auv_localization.launch.py
-  publish_tf: true
+  publish_tf: false
   datum:
     latitude: 0.0
     longitude: 0.0
     heading: 0.0
+
+navigator:
+  publish_tf: true
