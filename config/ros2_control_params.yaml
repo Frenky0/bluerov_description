@@ -143,7 +143,7 @@
     kd_z: 0.0
     antiwindup_z: 1.0
 
-    kp_roll: 1.0 #s
+    kp_roll: 1.0
     ki_roll: 0.0
     kd_roll: 0.0
     antiwindup_roll: 1.0
@@ -206,8 +206,8 @@
       enabled: true
       depth_topic: /bluerov/controller/depth_hold/debug
       depth_decimation: 10
-    feedforward_gain_x: 1.0
-    feedforward_gain_y: 1.0
+    feedforward_gain_x: 0.2  # valore iniziale : 1.0
+    feedforward_gain_y: 0.15  # valore iniziale : 1.0
     feedforward_gain_z: 1.0
     feedforward_gain_roll: 1.0
     feedforward_gain_pitch: 1.0
@@ -223,15 +223,33 @@
     kd_pitch: 0.0
     antiwindup_pitch: 0.2
 
-    kp_yaw: 4.0
-    ki_yaw: 0.2
-    kd_yaw: 0.0
-    antiwindup_yaw: 0.2
+    kp_yaw: 4.0  # valore iniziale : 4.0
+    ki_yaw: 0.2  # valore iniziale : 0.2
+    kd_yaw: 0.0  # valore iniziale : 0.0
+    antiwindup_yaw: 0.2  # valore iniziale : 0.2
 
-    kp_depth: 40.0
-    ki_depth: 3.0
-    kd_depth: 5.0
-    antiwindup_depth: 0.3
+    kp_depth: 35.0  # valore iniziale : 40.0
+    ki_depth: 0.8  # valore iniziale : 3.0
+    kd_depth: 6.0  # valore iniziale : 5.0
+    antiwindup_depth: 0.10  # valore iniziale : 0.3
+
+    # ros2 param get /bluerov/controller/depth_hold kp_roll
+    # ros2 param get /bluerov/controller/depth_hold ki_roll
+    # ros2 param get /bluerov/controller/depth_hold kd_roll
+    # ros2 param get /bluerov/controller/depth_hold kp_pitch
+    # ros2 param get /bluerov/controller/depth_hold ki_pitch
+    # ros2 param get /bluerov/controller/depth_hold kd_pitch
+    # ros2 param get /bluerov/controller/depth_hold kp_yaw
+    # ros2 param get /bluerov/controller/depth_hold ki_yaw
+    # ros2 param get /bluerov/controller/depth_hold kd_yaw
+    # ros2 param get /bluerov/controller/depth_hold kp_depth
+    # ros2 param get /bluerov/controller/depth_hold ki_depth
+    # ros2 param get /bluerov/controller/depth_hold kd_depth
+    # ros2 param get /bluerov/controller/depth_hold antiwindup_roll
+    # ros2 param get /bluerov/controller/depth_hold antiwindup_pitch
+    # ros2 param get /bluerov/controller/depth_hold antiwindup_yaw
+    # ros2 param get /bluerov/controller/depth_hold antiwindup_depth
+    # ros2 param get /bluerov/controller/depth_hold allow_roll_pitch
 
     # Double value is: 4.0
     # Double value is: 1.0
